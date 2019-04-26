@@ -1,0 +1,24 @@
+[package]
+name = "mqtt-svc-ex"
+version = "0.1.0"
+authors = ["Andrei Nesterov <ae.nesterov@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+log = "0.4"
+env_logger = "0.6"
+config = "0.9"
+failure = "0.1"
+serde = "1.0"
+serde_derive = "1.0"
+serde_json = "1.0"
+svc-agent = "0.5"
+svc-error = { version = "0.1", features = ["svc-agent"] }
+
+[dependencies.futures]
+version = "0.3.0-alpha.14"
+package = "futures-preview"
+
+[dependencies.futures-channel]
+version = "0.3.0-alpha.14"
+package = "futures-channel-preview"
