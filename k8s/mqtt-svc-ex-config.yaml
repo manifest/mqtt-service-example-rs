@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mqtt-svc-ex-config
+data:
+  App.toml: |
+    id = "mqtt-svc-ex.svc.example.org"
+
+    [mqtt]
+    uri = "mqtt://192.168.99.100:1883"
+    clean_session = false
+    incomming_message_queue_size = 1000000
+    outgoing_message_queue_size = 1000000

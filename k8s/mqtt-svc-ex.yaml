@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mqtt-svc-ex
+spec:
+  serviceName: mqtt-svc-ex-headless
+  selector:
+    matchLabels:
+      app: mqtt-svc-ex
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mqtt-svc-ex
+    spec:
+      containers:
+        - name: mqtt-svc-ex
+          image: manifesthub/mqtt-svc-ex
+          imagePullPolicy: Always
+          env:
+            - name: RUST_LOG
+              valueFrom:
+                configMapKeyRef:
+                  name: mqtt-svc-ex-environment
+                  key: RUST_LOG
+            - name: APP_AGENT_LABEL
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          volumeMounts:
+            - name: config
+              mountPath: /app/App.toml
+              subPath: App.toml
+          resources:
+            requests:
+              cpu: 100m
+              memory: 200Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
+      volumes:
+        - name: config
+          configMap:
+            name: mqtt-svc-ex-config

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mqtt-svc-ex-headless
+spec:
+  selector:
+    app: mqtt-svc-ex
+  clusterIP: None
